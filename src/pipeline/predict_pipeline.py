@@ -57,9 +57,15 @@ class PredictionPipeline:
             model = self.load_model()
             # preprocessor = self.load_preprocessor()  # Uncomment if preprocessor was saved
             
+            # Drop target column if present (trained on features only)
+            if isinstance(input_data, pd.DataFrame) and 'target' in input_data.columns:
+                logger.info("Dropping 'target' column from input data")
+                input_data = input_data.drop(columns=['target'])
+
             # Make predictions
             logger.info("Making predictions")
             predictions = model.predict(input_data)
+
             
             logger.info(f"Predictions made successfully. Shape: {predictions.shape}")
             

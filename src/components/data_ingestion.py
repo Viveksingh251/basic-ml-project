@@ -28,7 +28,8 @@ class DataIngestion:
         logger.info("Entered the data ingestion method")
         try:
             # Create artifacts directory if not exists
-            os.makedirs(os.path.dirname(self.ingestion_config.root_dir), exist_ok=True)
+            os.makedirs(self.ingestion_config.root_dir, exist_ok=True)
+
             
             logger.info("Reading the dataframe")
             df = dataframe

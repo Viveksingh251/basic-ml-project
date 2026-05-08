@@ -42,11 +42,12 @@ class TrainPipeline:
             # Step 3: Model Training
             logger.info("Step 3: Model Training")
             best_model = self.model_trainer.initiate_model_trainer(
-                train_path=transformed_train_path,
-                test_path=transformed_test_path,
+                train_path=train_path,
+                test_path=test_path,
                 target_column=target_column,
-                model_type=model_type
+                model_type=model_type,
             )
+
             
             logger.info("Training pipeline completed successfully")
             
@@ -71,6 +72,6 @@ if __name__ == "__main__":
     pipeline = TrainPipeline()
     
     # Run pipeline
-    # model = pipeline.run_pipeline(dataframe=df, target_column='target', test_size=0.2, model_type='regression')
-    
-    logger.info("Training pipeline finished")
+    model = pipeline.run_pipeline(dataframe=df, target_column='target', test_size=0.2, model_type='regression')
+    logger.info(f"Training pipeline finished. Best model: {type(model).__name__}")
+
